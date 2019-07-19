@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CanceledOrderModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="GetOrderReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GetOrderReportNoOperator" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="CanceledOrderModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CanceledOrderModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CanceledOrderEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="GetOrderReport" ReturnType="Collection(CanceledOrderModel.GetOrderReport_Result)">
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetOrderReportNoOperator" ReturnType="Collection(CanceledOrderModel.GetOrderReportNoOperator_Result)">
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetOrderReport_Result">
+          <Property Type="String" Name="RxOrRefill" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="CancelDateOrTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="PatientName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="ProductID" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Medication" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="CancelationReason" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Operator" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="GetOrderReportNoOperator_Result">
+          <Property Type="String" Name="RxOrRefill" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="CancelDateOrTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="PatientName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="ProductID" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Medication" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="CancelationReason" Nullable="true" MaxLength="255" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CanceledOrderModelStoreContainer" CdmEntityContainer="CanceledOrderEntities" >
+          <FunctionImportMapping FunctionImportName="GetOrderReport" FunctionName="CanceledOrderModel.Store.GetOrderReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CanceledOrderModel.GetOrderReport_Result">
+                <ScalarProperty Name="RxOrRefill" ColumnName="RxOrRefill" />
+                <ScalarProperty Name="CancelDateOrTime" ColumnName="CancelDateOrTime" />
+                <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Medication" ColumnName="Medication" />
+                <ScalarProperty Name="CancelationReason" ColumnName="CancelationReason" />
+                <ScalarProperty Name="Operator" ColumnName="Operator" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetOrderReportNoOperator" FunctionName="CanceledOrderModel.Store.GetOrderReportNoOperator">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CanceledOrderModel.GetOrderReportNoOperator_Result">
+                <ScalarProperty Name="RxOrRefill" ColumnName="RxOrRefill" />
+                <ScalarProperty Name="CancelDateOrTime" ColumnName="CancelDateOrTime" />
+                <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Medication" ColumnName="Medication" />
+                <ScalarProperty Name="CancelationReason" ColumnName="CancelationReason" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
